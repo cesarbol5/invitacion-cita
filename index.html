@@ -1,149 +1,227 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Invitación al Autocinema 💖</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invitación Samanta 💕</title>
   <style>
-    body {
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+    * {
       margin: 0;
-      font-family: 'Poppins', system-ui, sans-serif;
-      background-color: #ffe6ec;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #fdf3f0;
+      font-family: 'Poppins', sans-serif;
+      color: #5d4037;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
       overflow: hidden;
-      flex-direction: column;
+      padding: 20px;
       position: relative;
     }
 
     .container {
-      background: #fff5f8;
-      border-radius: 20px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-      padding: 25px;
       text-align: center;
       max-width: 380px;
-      width: 90%;
+      width: 100%;
+      padding: 20px;
+      background: #fdf3f0;
+      border-radius: 20px;
       position: relative;
-      z-index: 2;
+      z-index: 10;
     }
 
     h1 {
-      color: #a13d63;
-      margin-bottom: 10px;
-      font-size: 24px;
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      color: #8d6e63;
+      font-weight: 700;
     }
 
     .ticket {
-      background: #f9d8b3;
-      border: 2px dashed #a13d63;
-      border-radius: 12px;
-      padding: 12px;
-      margin: 14px auto;
-      width: 100%;
-      color: #522b33;
+      background: #f9e6c4;
+      border: 3px solid #d7a86a;
+      border-radius: 15px;
+      padding: 20px 15px;
+      margin: 25px auto;
+      max-width: 300px;
+      position: relative;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
+
+    .ticket::before,
+    .ticket::after {
+      content: '';
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: #fdf3f0;
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .ticket::before { left: -15px; }
+    .ticket::after { right: -15px; }
 
     .ticket h2 {
-      font-size: 18px;
-      margin: 4px 0;
+      font-size: 1.4rem;
+      color: #5d4037;
+      margin-bottom: 8px;
+      font-weight: 700;
     }
 
-    .ticket p {
-      margin: 4px 0;
-      font-weight: 600;
+    .ticket .names {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #8d6e63;
+      margin: 10px 0;
     }
 
-    .message {
-      margin-top: 10px;
-      color: #7a3b52;
-      font-size: 15px;
-      line-height: 1.5;
+    .ticket .date {
+      font-size: 1rem;
+      color: #6d4c41;
+      margin-bottom: 15px;
     }
 
-    .actions {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 18px;
+    .car {
+      font-size: 2rem;
+      margin: 10px 0;
     }
 
-    button {
+    .text {
+      font-size: 1.3rem;
+      line-height: 1.6;
+      margin: 25px 0;
+      color: #6d4c41;
+      font-weight: 500;
+    }
+
+    .btn {
+      background: #ffccbc;
+      color: #8d6e63;
       border: none;
-      border-radius: 10px;
-      padding: 10px 20px;
-      font-size: 15px;
+      padding: 14px 40px;
+      font-size: 1.3rem;
       font-weight: 600;
+      border-radius: 50px;
       cursor: pointer;
-      transition: 0.3s;
+      margin-top: 20px;
+      box-shadow: 0 4px 10px rgba(255, 152, 0, 0.2);
+      transition: all 0.3s ease;
+      display: inline-block;
     }
 
-    .accept {
-      background-color: #ff7da0;
-      color: white;
+    .btn:hover {
+      background: #ffab91;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(255, 152, 0, 0.3);
     }
 
-    button:hover {
-      transform: scale(1.05);
+    .btn:active {
+      transform: translateY(0);
     }
 
-    .heart, .flower {
+    /* Corazones y flores flotantes */
+    .floating {
       position: absolute;
-      font-size: 18px;
-      opacity: 0.8;
-      animation: float 8s linear infinite;
+      pointer-events: none;
+      animation: float 6s infinite ease-in-out;
+      z-index: 1;
     }
 
     @keyframes float {
-      0% { transform: translateY(100vh) scale(0.6); opacity: 0; }
-      20% { opacity: 1; }
-      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+      50% { transform: translateY(-20px) rotate(5deg); opacity: 1; }
     }
 
+    .heart {
+      color: #ff8a80;
+      font-size: 1.2rem;
+      animation-duration: 5s;
+    }
+
+    .flower {
+      font-size: 1.3rem;
+      animation-duration: 7s;
+    }
+
+    .flower.pink { color: #ff80ab; }
+    .flower.yellow { color: #ffd54f; }
+    .flower.orange { color: #ffab40; }
   </style>
 </head>
 <body>
+
   <div class="container">
-    <h1>Hola Samanta 💕</h1>
+    <h1>Hola Samanta</h1>
 
     <div class="ticket">
       <h2>AUTOCINEMA</h2>
-      <p><strong>CÉSAR Y SAMANTA</strong></p>
-      <p>5 DE NOVIEMBRE • 8:30 PM</p>
-      <p>🎬✨ Bajo las estrellas</p>
+      <div class="names">CÉSAR Y SAMANTA</div>
+      <div class="date">5 DE NOVIEMBRE • 8:30 PM</div>
+      <div class="car">🚗</div>
     </div>
 
-    <div class="message">
-      Voy a pasar por ti más temprano.<br>
-      Ponte linda y disfruta de la hermosa noche que tendremos viendo la película bajo las estrellas 🌙💖
-    </div>
+    <p class="text">
+      Voy a pasar por ti<br>más temprano.<br><br>
+      Ponte linda y disfruta de la<br>hermosa noche que tendremos<br>viendo la película bajo las estrel-
+    </p>
 
-    <div class="actions">
-      <button class="accept" onclick="openWhatsApp()">Aceptar 💕</button>
-    </div>
+    <button class="btn" onclick="openWhatsApp()">
+      Aceptar 💕
+    </button>
   </div>
 
+  <!-- Elementos flotantes -->
   <script>
-    // animación de corazones y flores
-    const emojis = ['💖','🌸','💞','🌷','💐'];
-    function createFloatingEmoji(){
-      const el = document.createElement('div');
-      el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-      el.style.left = Math.random()*100 + 'vw';
-      el.style.animationDelay = Math.random()*5 + 's';
-      el.classList.add(Math.random()>0.5?'heart':'flower');
-      document.body.appendChild(el);
-      setTimeout(()=>el.remove(),8000);
-    }
-    setInterval(createFloatingEmoji,600);
+    const hearts = ['💕', '❤️', '🩷', '💖', '🧡'];
+    const flowers = ['🌸', '🌼', '🌺', '🌷', '🌻'];
 
-    // botón WhatsApp
-    function openWhatsApp(){
-      const url = 'https://wa.me/525662750806?text=S%C3%AD%2C%20quiero%20ir%20al%20autocinema%20contigo%20%F0%9F%92%95%E2%9C%A8';
+    function createFloating() {
+      const types = [...hearts, ...flowers];
+      const type = types[Math.floor(Math.random() * types.length)];
+      const isHeart = hearts.includes(type);
+      const size = isHeart ? (15 + Math.random() * 15) : (18 + Math.random() * 12);
+      const left = Math.random() * 100;
+      const duration = 4 + Math.random() * 6;
+      const delay = Math.random() * 5;
+
+      const el = document.createElement('div');
+      el.className = `floating ${isHeart ? 'heart' : 'flower ' + (type === '🌼' ? 'yellow' : type === '🌻' ? 'orange' : 'pink')}`;
+      el.style.left = `${left}vw`;
+      el.style.fontSize = `${size}px`;
+      el.style.animationDuration = `${duration}s`;
+      el.style.animationDelay = `${delay}s`;
+      el.innerHTML = type;
+
+      document.body.appendChild(el);
+
+      setTimeout(() => el.remove(), (duration + delay) * 1000 + 1000);
+    }
+
+    // Crear elementos flotantes cada 800ms
+    setInterval(createFloating, 800);
+
+    // Iniciar algunos al cargar
+    for (let i = 0; i < 12; i++) {
+      setTimeout(createFloating, i * 300);
+    }
+
+    // Abrir WhatsApp con mensaje
+    function openWhatsApp() {
+      const phone = "521XXXXXXXXXX"; // ⚠️ REEMPLAZA con el número real (formato internacional sin +)
+      const message = encodeURIComponent("¡Sí acepto! 💕 Estoy emocionada por nuestra noche en el autocinema. ¡Te espero! 😘");
+      const url = `https://wa.me/${phone}?text=${message}`;
       window.open(url, '_blank');
     }
   </script>
+
 </body>
 </html>
