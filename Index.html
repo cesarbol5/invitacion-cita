@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>¿Salimos? 💖🌸</title>
+  <style>
+    :root{--bg:#fff0f6;--card:#ffffff;--accent:#ff4d94;--muted:#555}
+    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;}
+    body{background:linear-gradient(180deg,#fff0f6 0%, #fff 60%);display:flex;align-items:center;justify-content:center;padding:20px}
+
+    /* Solo móvil: mostrar mensaje si no es móvil */
+    .desktop-note{display:none}
+    @media (min-width:480px){
+      .card{display:none}
+      .desktop-note{display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:20px}
+    }
+
+    .card{width:100%;max-width:420px;background:var(--card);border-radius:20px;box-shadow:0 8px 30px rgba(0,0,0,0.08);padding:22px;position:relative;overflow:hidden}
+    .title{font-size:20px;font-weight:700;color:var(--accent);text-align:center;margin-bottom:6px}
+    .subtitle{font-size:14px;color:var(--muted);text-align:center;margin-bottom:18px}
+
+    .photo{width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,#ffd6e8,#ffd3f0);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:48px}
+
+    .message{background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.8));padding:12px;border-radius:12px;font-size:15px;line-height:1.3;color:#333;text-align:center}
+
+    .actions{display:flex;gap:10px;margin-top:16px}
+    .btn{flex:1;padding:12px;border-radius:12px;border:0;font-weight:700;font-size:16px}
+    .btn-primary{background:var(--accent);color:white}
+    .btn-soft{background:transparent;border:2px solid #ffd2e6;color:var(--accent)}
+
+    .footer{font-size:12px;color:var(--muted);text-align:center;margin-top:12px}
+
+    /* animación de corazones y flores */
+    .float-layer{position:absolute;inset:0;pointer-events:none}
+    .float{position:absolute;font-size:18px;opacity:0;transform:translateY(0) scale(0.7);animation:rise 6s linear forwards}
+    @keyframes rise{
+      0%{opacity:0;transform:translateY(40px) scale(0.7)}
+      10%{opacity:1}
+      100%{opacity:0;transform:translateY(-320px) scale(1.05)}
+    }
+
+    /* modal */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;padding:20px}
+    .modal-card{background:white;border-radius:16px;padding:18px;max-width:380px;width:100%;text-align:center}
+
+  </style>
+</head>
+<body>
+  <div class="card" id="card">
+    <div class="float-layer" id="floatLayer"></div>
+    <div class="photo">💐</div>
+    <div class="title">Hola 😊</div>
+    <div class="subtitle">He hecho esto especialmente para ti</div>
+
+    <div class="message" id="message">
+      Me gustaría invitarte a salir para conocernos mejor. ¿Te gustaría ir a tomar un café o dar un paseo conmigo?
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="yesBtn">Sí, me encantaría 💖</button>
+      <button class="btn btn-soft" id="noBtn">Me lo pienso 🌷</button>
+    </div>
+
+    <div class="footer">Pulsa una opción — y si quieres, personaliza el mensaje abajo</div>
+
+    <div style="margin-top:14px;display:flex;gap:8px">
+      <input id="custom" placeholder="Escribe un mensaje personalizado" style="flex:1;padding:10px;border-radius:10px;border:1px solid #f1d6e3;font-size:14px" />
+      <button id="sendCustom" style="padding:10px;border-radius:10px;border:0;background:#ffd6e8">Actualizar</button>
+    </div>
+  </div>
+
+  <div class="desktop-note">
+    <div style="max-width:420px;padding:22px;border-radius:12px;background:white;box-shadow:0 8px 30px rgba(0,0,0,0.06);text-align:center">
+      <div style="font-size:22px;font-weight:700;color:var(--accent)">Abre esto en tu celular</div>
+      <div style="margin-top:8px;color:#666">La invitación está diseñada solo para móviles para verse mágica ✨</div>
+    </div>
+  </div>
+
+  <template id="floatTpl">❤️</template>
+
+  <script>
+    const layer = document.getElementById('floatLayer');
+    const tpl = document.getElementById('floatTpl').innerText.trim();
+
+    // generar corazones y flores al azar
+    function spawn(){
+      const el = document.createElement('div');
+      el.className = 'float';
+      // alternar emoji entre corazón y flor
+      const r = Math.random();
+      el.textContent = r>0.5 ? '❤️' : '🌸';
+      // posición horizontal al azar
+      el.style.left = (Math.random()*90+5) + '%';
+      // tamaño aleatorio
+      const size = Math.floor(Math.random()*18)+14;
+      el.style.fontSize = size+'px';
+      // delay aleatorio para variedad
+      el.style.animationDuration = (5+Math.random()*4)+'s';
+      el.style.animationDelay = (Math.random()*1)+'s';
+      layer.appendChild(el);
+      // limpiar luego de animación
+      setTimeout(()=>{el.remove()},9000);
+    }
+    // spawn frecuente pero ligero
+    setInterval(spawn,600);
+
+    // Botones
+    const yes = document.getElementById('yesBtn');
+    const no = document.getElementById('noBtn');
+    const message = document.getElementById('message');
+    const custom = document.getElementById('custom');
+    const sendCustom = document.getElementById('sendCustom');
+
+    yes.addEventListener('click',()=>{
+      showModal('¡Qué emoción! 💖\n\nGracias por aceptar — ¿qué día te viene bien?');
+    });
+    no.addEventListener('click',()=>{
+      showModal('Perfecto, gracias por responder 😊\n\nSi cambias de opinión, aquí estaré.');
+    });
+
+    sendCustom.addEventListener('click',()=>{
+      const t = custom.value.trim();
+      if(t) message.textContent = t;
+    });
+
+    function showModal(text){
+      const modal = document.createElement('div');
+      modal.className = 'modal';
+      modal.innerHTML = `
+        <div class="modal-card">
+          <div style="font-size:18px;margin-bottom:10px">${text.replace(/\n/g,'<br>')}</div>
+          <div style="display:flex;gap:10px;margin-top:12px">
+            <button style="flex:1;padding:10px;border-radius:10px;border:0;background:var(--accent);color:white;font-weight:700" id="okBtn">Aceptar</button>
+            <button style="flex:1;padding:10px;border-radius:10px;border:0;background:#f1f1f1" id="closeBtn">Cerrar</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      document.getElementById('closeBtn').addEventListener('click',()=>modal.remove());
+      document.getElementById('okBtn').addEventListener('click',()=>{
+        modal.remove();
+        // añadir un corazón grande como confirmación
+        const big = document.createElement('div');
+        big.textContent = '💖';
+        big.style.position='fixed';big.style.left='50%';big.style.top='40%';big.style.transform='translate(-50%,-50%) scale(0.6)';big.style.fontSize='80px';big.style.transition='transform 500ms ease, opacity 800ms';
+        document.body.appendChild(big);
+        setTimeout(()=>{big.style.transform='translate(-50%,-50%) scale(1)';},10);
+        setTimeout(()=>{big.style.opacity='0';big.style.transform='translate(-50%,-20%) scale(1.4)';},900);
+        setTimeout(()=>big.remove(),1700);
+      });
+    }
+
+    // Sugerencia: cuando se cargue, generar algunos elementos
+    for(let i=0;i<6;i++){setTimeout(spawn,i*200)}
+  </script>
+</body>
+</html>
