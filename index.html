@@ -14,7 +14,7 @@
     overflow: hidden;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     min-height: 100vh;
     position: relative;
   }
@@ -29,7 +29,6 @@
     width: 90%;
     position: relative;
     z-index: 2;
-    overflow: hidden; /* importante para que los emojis queden sobre el contenedor */
   }
 
   h1 {
@@ -63,6 +62,8 @@
   .ticket-details { font-size: 15px; margin-bottom: 4px; font-weight: 600; }
   .ticket-movie { font-size: 16px; font-weight: bold; text-transform: uppercase; margin-bottom: 4px; }
 
+  .emoji-icon { font-size: 2em; margin-top: 10px; display: block; }
+
   p {
     color: #7a3b52;
     font-size: 15px;
@@ -85,24 +86,26 @@
 
   .btn:hover { transform: scale(1.05); }
 
-  /* Animación de emojis cayendo sobre el contenedor */
+  /* Animación de emojis cayendo desde arriba de la página */
   @keyframes fall {
-    0% { transform: translateY(-30px) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(280px) rotate(360deg); opacity: 0; }
+    0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
   }
 
   .emoji {
-    position: absolute;
+    position: fixed;
     font-size: 22px;
     pointer-events: none;
     animation-name: fall;
     animation-timing-function: linear;
+    z-index: 999;
   }
+
 </style>
 </head>
 <body>
 
-<div class="container" id="invitation">
+<div class="container">
   <h1>Hola Samanta 💕</h1>
 
   <div class="ticket-box">
@@ -110,6 +113,7 @@
     <div class="ticket-names">CÉSAR Y SAMANTA</div>
     <div class="ticket-details">5 DE NOVIEMBRE • 8:30 PM</div>
     <div class="ticket-movie">Bajo las estrellas</div>
+    <span class="emoji-icon" role="img" aria-label="Coche">🚗</span>
   </div>
 
   <p>Voy a pasar por ti más temprano.</p>
@@ -119,28 +123,29 @@
 </div>
 
 <script>
-const container = document.getElementById('invitation');
 const emojisList = ['💖','🌸','💞','🌷','💐'];
 
 function crearEmoji() {
   const e = document.createElement('div');
   e.classList.add('emoji');
   e.textContent = emojisList[Math.floor(Math.random()*emojisList.length)];
-  const contWidth = container.offsetWidth;
-  e.style.left = Math.random() * (contWidth - 30) + 'px'; // se ajusta al ancho del contenedor
-  e.style.animationDuration = (Math.random()*3 + 4) + 's';
-  container.appendChild(e);
-  setTimeout(()=> e.remove(), 7000);
+  e.style.left = Math.random() * (window.innerWidth - 30) + 'px';
+  e.style.fontSize = (Math.random() * 1 + 1.2) + 'em';
+  e.style.animationDuration = (Math.random() * 5 + 5) + 's';
+  e.style.animationDelay = '0s';
+  document.body.appendChild(e);
+  setTimeout(()=> e.remove(), 10000);
 }
 
+// Crear emojis de forma continua
 setInterval(crearEmoji, 400);
 
+// Función WhatsApp
 function confirmarAsistencia() {
   const phoneNumber = '5215662750806';
   const message = encodeURIComponent("¡Sí acepto!, quiero ir al autocinema contigo 💕✨");
   window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
 }
 </script>
-
 </body>
 </html>
