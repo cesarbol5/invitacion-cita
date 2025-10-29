@@ -6,6 +6,7 @@
     <title>Invitación Especial</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* Estilos Base */
         body {
             font-family: 'Open Sans', sans-serif;
             background-color: #fce4ec; /* Rosa muy claro */
@@ -34,6 +35,8 @@
             font-size: 2.8em;
             margin-bottom: 20px;
         }
+
+        /* Estilos del Ticket */
         .ticket-box {
             background-color: #f7e6d3; /* Crema claro */
             border: 2px dashed #d1a684; /* Marrón suave para el borde */
@@ -51,17 +54,14 @@
             position: absolute;
             width: 20px;
             height: 20px;
-            background-color: #fce4ec; /* Fondo del cuerpo */
+            background-color: #fce4ec; /* Fondo del cuerpo para el efecto de rasgado */
             border-radius: 50%;
             top: 50%;
             transform: translateY(-50%);
         }
-        .ticket-box::before {
-            left: -10px;
-        }
-        .ticket-box::after {
-            right: -10px;
-        }
+        .ticket-box::before { left: -10px; }
+        .ticket-box::after { right: -10px; }
+
         .ticket-title {
             font-size: 1.3em;
             font-weight: bold;
@@ -79,9 +79,9 @@
             color: #696969; /* DimGray */
             margin-bottom: 15px;
         }
-        .car-icon {
-            width: 50px;
-            height: auto;
+        .emoji-icon {
+            font-size: 2.5em; /* Tamaño grande para el emoji */
+            display: block;
             margin-top: 10px;
         }
         p {
@@ -90,6 +90,8 @@
             line-height: 1.6;
             margin-bottom: 25px;
         }
+
+        /* Botones */
         .buttons {
             display: flex;
             justify-content: center;
@@ -117,61 +119,67 @@
         .btn.reject:hover {
             background-color: #ec407a; /* Rosa más oscuro */
         }
-        .heart, .flower {
-            position: absolute;
+
+        /* Animación de Corazones y Flores que Caen */
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .falling-item {
+            position: fixed;
+            top: 0;
             font-size: 2em;
-            opacity: 0.7;
+            opacity: 0;
             pointer-events: none;
-            color: #ffab91; /* Color de los corazones y flores */
+            animation: fall linear infinite;
+            z-index: 0;
         }
-        .heart-small {
-            font-size: 1.5em;
-        }
-        .flower-small {
-            font-size: 1.3em;
-        }
-        .heart:nth-child(1) { top: 5%; left: 10%; transform: rotate(-15deg); }
-        .heart:nth-child(2) { top: 15%; right: 5%; transform: rotate(20deg); }
-        .heart:nth-child(3) { top: 30%; left: 5%; transform: rotate(5deg); }
-        .heart:nth-child(4) { bottom: 10%; right: 15%; transform: rotate(-10deg); }
-        .heart:nth-child(5) { bottom: 5%; left: 25%; transform: rotate(25deg); }
-        .heart:nth-child(6) { top: 50%; right: 2%; transform: rotate(10deg); }
-        .flower:nth-child(1) { top: 10%; right: 15%; transform: rotate(30deg); color: #ffd180; } /* Naranja claro */
-        .flower:nth-child(2) { bottom: 8%; left: 10%; transform: rotate(-20deg); color: #ffd180; }
-        .flower:nth-child(3) { top: 25%; left: 20%; transform: rotate(45deg); color: #ffd180; }
-        .flower:nth-child(4) { bottom: 20%; right: 5%; transform: rotate(-5deg); color: #ffd180; }
+
+        /* Configuración de las animaciones individuales */
+        .falling-item:nth-child(1) { left: 5%; animation-duration: 8s; animation-delay: 0s; font-size: 1.5em; }
+        .falling-item:nth-child(2) { left: 15%; animation-duration: 12s; animation-delay: 1s; font-size: 2.5em; }
+        .falling-item:nth-child(3) { left: 25%; animation-duration: 7s; animation-delay: 2s; font-size: 1.8em; }
+        .falling-item:nth-child(4) { left: 35%; animation-duration: 10s; animation-delay: 3s; font-size: 2.2em; }
+        .falling-item:nth-child(5) { left: 45%; animation-duration: 9s; animation-delay: 4s; font-size: 1.6em; }
+        .falling-item:nth-child(6) { left: 55%; animation-duration: 11s; animation-delay: 5s; font-size: 2.3em; }
+        .falling-item:nth-child(7) { left: 65%; animation-duration: 6s; animation-delay: 6s; font-size: 1.9em; }
+        .falling-item:nth-child(8) { left: 75%; animation-duration: 13s; animation-delay: 7s; font-size: 2.1em; }
+        .falling-item:nth-child(9) { left: 85%; animation-duration: 8.5s; animation-delay: 8s; font-size: 1.7em; }
+        .falling-item:nth-child(10) { left: 95%; animation-duration: 10.5s; animation-delay: 9s; font-size: 2.4em; }
+
+        /* Más estilos para variar */
+        .falling-item:nth-child(odd) { transform: scaleX(-1); /* Reflejar algunos para que se vean diferentes */ }
     </style>
 </head>
 <body>
-    <div class="heart">❤️</div>
-    <div class="heart heart-small" style="top: 10%; left: 80%;">❤️</div>
-    <div class="heart" style="top: 3%; right: 30%;">❤️</div>
-    <div class="heart heart-small" style="top: 25%; right: 10%;">❤️</div>
-    <div class="heart" style="bottom: 3%; left: 15%;">❤️</div>
-    <div class="heart heart-small" style="bottom: 12%; right: 25%;">❤️</div>
-
-    <div class="flower">🌸</div>
-    <div class="flower flower-small" style="top: 18%; left: 5%;">🌸</div>
-    <div class="flower" style="bottom: 5%; right: 8%;">🌸</div>
-    <div class="flower flower-small" style="top: 60%; left: 10%;">🌸</div>
-
+    <div class="falling-item">❤️</div>
+    <div class="falling-item">🌸</div>
+    <div class="falling-item">💖</div>
+    <div class="falling-item">🌷</div>
+    <div class="falling-item">❤️</div>
+    <div class="falling-item">🌸</div>
+    <div class="falling-item">💖</div>
+    <div class="falling-item">🌷</div>
+    <div class="falling-item">❤️</div>
+    <div class="falling-item">🌸</div>
 
     <div class="container">
-        <h1>Hola Samanta</h1>
+        <h1>¡Tenemos una cita!</h1>
 
         <div class="ticket-box">
-            <div class="ticket-title">AUTOCINEMA</div>
-            <div class="ticket-names">CÉSAR Y SAMANTA</div>
-            <div class="ticket-details">5 DE NOVIEMBRE • 8:30 PM</div>
-            <img src="https://www.flaticon.com/svg/v2/search/32/32/32/32/491563.svg" alt="Coche" class="car-icon">
+            <div class="ticket-title">EVENTO DE LUJO</div>
+            <div class="ticket-names">TÚ Y YO</div>
+            <div class="ticket-details">PRÓXIMO FIN DE SEMANA • HORA SECRETA</div>
+            <span class="emoji-icon" role="img" aria-label="Carrito de compra">🛒</span>
         </div>
 
-        <p>Voy a pasar por ti más temprano.</p>
-        <p>Ponte linda y disfruta de la hermosa noche que tendremos viendo la película bajo las estrellas.</p>
+        <p>Prepara tu mejor atuendo. Será una noche épica llena de sorpresas inolvidables.</p>
+        <p>¿Aceptas embarcarte en esta aventura conmigo?</p>
 
         <div class="buttons">
-            <button class="btn">Aceptar</button>
-            <button class="btn reject">Rechazar</button>
+            <button class="btn">¡Acepto!</button>
+            <button class="btn reject">Lo pensaré...</button>
         </div>
     </div>
 </body>
