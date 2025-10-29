@@ -4,113 +4,135 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Invitación Especial - César y Sam</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   body {
     font-family: 'Open Sans', sans-serif;
     background-color: #fce4ec;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     position: relative;
   }
 
-  /* Contenedor central */
   .container {
-    background-color: #fff;
-    padding: 20px;
+    background-color: #fff5f8;
+    padding: 25px;
     border-radius: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
     max-width: 380px;
-    margin: 40px auto;
+    width: 90%;
     position: relative;
-    z-index: 10;
+    z-index: 2;
+    overflow: hidden; /* importante para que los emojis queden sobre el contenedor */
   }
 
-  h1 { font-size: 2em; color: #ff8a80; margin: 0.2em 0; }
-  h2 { font-size: 1.5em; color: #a0522d; margin: 0.2em 0 1em; }
+  h1 {
+    font-family: 'Pacifico', cursive;
+    color: #a13d63;
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
+
+  h2 {
+    font-family: 'Pacifico', cursive;
+    color: #a13d63;
+    margin: 5px 0 15px;
+    font-size: 20px;
+  }
 
   .ticket-box {
-    background-color: #f7e6d3;
-    border: 2px dashed #d1a684;
-    border-radius: 10px;
-    padding: 1em;
-    margin: 1em auto;
-    width: 85%;
-    max-width: 280px;
+    background-color: #f9d8b3;
+    border: 2px dashed #a13d63;
+    border-radius: 12px;
+    padding: 12px;
+    margin: 14px auto;
+    width: 100%;
+    color: #522b33;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: relative;
   }
 
-  .ticket-title { font-weight: bold; color: #a0522d; margin-bottom: 0.3em; }
-  .ticket-names { font-weight: bold; color: #8b4513; margin-bottom: 0.3em; }
-  .ticket-details { font-size: 0.9em; color: #696969; margin-bottom: 0.3em; }
-  .ticket-movie { font-weight: bold; color: #d1a684; text-transform: uppercase; }
+  .ticket-title { font-size: 18px; font-weight: bold; margin-bottom: 4px; }
+  .ticket-names { font-size: 20px; font-weight: bold; margin-bottom: 4px; }
+  .ticket-details { font-size: 15px; margin-bottom: 4px; font-weight: 600; }
+  .ticket-movie { font-size: 16px; font-weight: bold; text-transform: uppercase; margin-bottom: 4px; }
 
-  p { margin: 0.5em 0; font-weight: 600; color: #555; }
+  p {
+    color: #7a3b52;
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 8px 0;
+  }
 
   .btn {
-    background-color: #ffab91;
-    color: #fff;
-    padding: 0.8em 1.5em;
+    background-color: #ff7da0;
+    color: white;
+    padding: 10px 20px;
     border: none;
-    border-radius: 30px;
-    font-size: 1em;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
     cursor: pointer;
-    margin-top: 1em;
     transition: 0.3s;
+    margin-top: 15px;
   }
-  .btn:hover { background-color: #ff8a80; transform: translateY(-2px); }
 
-  /* Animación de caída de emojis */
+  .btn:hover { transform: scale(1.05); }
+
+  /* Animación de emojis cayendo sobre el contenedor */
   @keyframes fall {
-    0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    0% { transform: translateY(-30px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(280px) rotate(360deg); opacity: 0; }
   }
 
-  .falling {
-    position: fixed;
-    font-size: 2em;
+  .emoji {
+    position: absolute;
+    font-size: 22px;
     pointer-events: none;
     animation-name: fall;
     animation-timing-function: linear;
-    z-index: 999;
   }
-
 </style>
 </head>
 <body>
 
-<div class="container">
-  <h1>¡Tenemos una cita!</h1>
-  <h2>Samanta</h2>
+<div class="container" id="invitation">
+  <h1>Hola Samanta 💕</h1>
 
   <div class="ticket-box">
     <div class="ticket-title">AUTOCINEMA</div>
-    <div class="ticket-names">CÉSAR Y SAM</div>
+    <div class="ticket-names">CÉSAR Y SAMANTA</div>
     <div class="ticket-details">5 DE NOVIEMBRE • 8:30 PM</div>
-    <div class="ticket-movie">Película: FRANKENSTEIN</div>
-    <span style="font-size:2em;">🚗</span>
+    <div class="ticket-movie">Bajo las estrellas</div>
   </div>
 
-  <p>Pasaré por ti más temprano.</p>
-  <p>Ponte linda y disfruta de la hermosa noche que tendremos.</p>
-  <p>Esta noche será muy especial.</p>
+  <p>Voy a pasar por ti más temprano.</p>
+  <p>Ponte linda y disfruta de la hermosa noche que tendremos viendo la película 🌙✨</p>
 
-  <button class="btn" onclick="confirmarAsistencia()">¡Acepto!</button>
+  <button class="btn" onclick="confirmarAsistencia()">Aceptar 💕</button>
 </div>
 
 <script>
-const emojis = ['❤️','💖','🌸','🌷','💞'];
+const container = document.getElementById('invitation');
+const emojisList = ['💖','🌸','💞','🌷','💐'];
+
 function crearEmoji() {
   const e = document.createElement('div');
-  e.classList.add('falling');
-  e.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-  e.style.left = Math.random() * 100 + 'vw';
-  e.style.fontSize = (Math.random()*1+1.2)+'em';
-  e.style.animationDuration = (Math.random()*5+5)+'s';
-  e.style.animationDelay = '0s';
-  document.body.appendChild(e);
-  setTimeout(()=> e.remove(),10000);
+  e.classList.add('emoji');
+  e.textContent = emojisList[Math.floor(Math.random()*emojisList.length)];
+  const contWidth = container.offsetWidth;
+  e.style.left = Math.random() * (contWidth - 30) + 'px'; // se ajusta al ancho del contenedor
+  e.style.animationDuration = (Math.random()*3 + 4) + 's';
+  container.appendChild(e);
+  setTimeout(()=> e.remove(), 7000);
 }
+
 setInterval(crearEmoji, 400);
 
 function confirmarAsistencia() {
@@ -119,5 +141,6 @@ function confirmarAsistencia() {
   window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
 }
 </script>
+
 </body>
 </html>
