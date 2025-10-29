@@ -1,209 +1,123 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invitación Especial - César y Sam</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* Estilos Base */
-        body {
-            font-family: 'Open Sans', sans-serif;
-            background-color: #fce4ec; /* Rosa muy claro */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            position: relative;
-            overflow: hidden; /* Esto es importante para que los elementos que caen no creen barras de desplazamiento */
-            font-size: 16px; /* Base para rem */
-        }
-        .container {
-            background-color: #fff;
-            padding: 1.5em; /* Ajuste para móvil */
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-            position: relative;
-            z-index: 10; /* La invitación: Capa intermedia (suficientemente alta para el contenido) */
-        }
-        h1 {
-            font-family: 'Pacifico', cursive;
-            color: #ff8a80; /* Rosa rojizo */
-            font-size: 2.5em;
-            margin-bottom: 0.2em;
-        }
-        h2 {
-            font-family: 'Pacifico', cursive;
-            color: #a0522d; /* Color marrón suave */
-            font-size: 1.5em;
-            margin-top: 0;
-            margin-bottom: 1.5em;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitación Especial - César y Sam</title>
+<style>
+  body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #fce4ec;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    position: relative;
+  }
 
-        /* Estilos del Ticket */
-        .ticket-box {
-            background-color: #f7e6d3; /* Crema claro */
-            border: 2px dashed #d1a684; /* Marrón suave para el borde */
-            border-radius: 10px;
-            padding: 1.2em 0.8em;
-            margin: 1.5em auto;
-            width: 85%;
-            max-width: 280px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            position: relative;
-            overflow: hidden;
-        }
-        .ticket-box::before, .ticket-box::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: #fce4ec; /* Fondo del cuerpo para el efecto de rasgado */
-            border-radius: 50%;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        .ticket-box::before { left: -10px; }
-        .ticket-box::after { right: -10px; }
+  /* Contenedor central */
+  .container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 380px;
+    margin: 40px auto;
+    position: relative;
+    z-index: 10;
+  }
 
-        .ticket-title { font-size: 1.1em; font-weight: bold; color: #a0522d; margin-bottom: 0.3em; }
-        .ticket-names { font-size: 1.4em; font-weight: bold; color: #8b4513; margin-bottom: 0.6em; }
-        .ticket-details { font-size: 0.9em; color: #696969; margin-bottom: 0.5em; }
-        .ticket-movie { font-size: 0.95em; font-weight: bold; color: #d1a684; margin-bottom: 1em; text-transform: uppercase; }
-        .emoji-icon { font-size: 2.2em; display: block; margin-top: 0.8em; }
-        p { color: #555; font-size: 1em; line-height: 1.5; margin-bottom: 1.5em; font-weight: 600; }
+  h1 { font-size: 2em; color: #ff8a80; margin: 0.2em 0; }
+  h2 { font-size: 1.5em; color: #a0522d; margin: 0.2em 0 1em; }
 
-        /* Botón de Aceptar */
-        .buttons { display: flex; justify-content: center; margin-top: 1.5em; }
-        .btn {
-            background-color: #ffab91; color: #fff; padding: 0.8em 1.5em; border: none; border-radius: 30px;
-            font-size: 1.1em; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); font-weight: bold;
-        }
-        .btn:hover { background-color: #ff8a80; transform: translateY(-2px); }
+  .ticket-box {
+    background-color: #f7e6d3;
+    border: 2px dashed #d1a684;
+    border-radius: 10px;
+    padding: 1em;
+    margin: 1em auto;
+    width: 85%;
+    max-width: 280px;
+  }
 
-        /* Animación de Corazones y Flores que Caen */
-        @keyframes fall {
-            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-        }
+  .ticket-title { font-weight: bold; color: #a0522d; margin-bottom: 0.3em; }
+  .ticket-names { font-weight: bold; color: #8b4513; margin-bottom: 0.3em; }
+  .ticket-details { font-size: 0.9em; color: #696969; margin-bottom: 0.3em; }
+  .ticket-movie { font-weight: bold; color: #d1a684; text-transform: uppercase; }
 
-        .falling-item {
-            position: fixed;
-            top: 0;
-            font-size: 2em;
-            opacity: 0;
-            pointer-events: none;
-            animation: fall linear infinite;
-            z-index: 999; /* ALTÍSIMO para que esté SIEMPRE POR ENCIMA */
-        }
-        /* Configuraciones de caída variadas */
-        .falling-item:nth-child(1) { left: 5%; animation-duration: 8s; animation-delay: 0s; font-size: 1.2em; }
-        .falling-item:nth-child(2) { left: 15%; animation-duration: 12s; animation-delay: 1s; font-size: 2em; }
-        .falling-item:nth-child(3) { left: 25%; animation-duration: 7s; animation-delay: 2s; font-size: 1.4em; }
-        .falling-item:nth-child(4) { left: 35%; animation-duration: 10s; animation-delay: 3s; font-size: 1.8em; }
-        .falling-item:nth-child(5) { left: 45%; animation-duration: 9s; animation-delay: 4s; font-size: 1.3em; }
-        .falling-item:nth-child(6) { left: 55%; animation-duration: 11s; animation-delay: 5s; font-size: 1.9em; }
-        .falling-item:nth-child(7) { left: 65%; animation-duration: 6s; animation-delay: 6s; font-size: 1.5em; }
-        .falling-item:nth-child(8) { left: 75%; animation-duration: 13s; animation-delay: 7s; font-size: 1.7em; }
-        .falling-item:nth-child(9) { left: 85%; animation-duration: 8.5s; animation-delay: 8s; font-size: 1.3em; }
-        .falling-item:nth-child(10) { left: 95%; animation-duration: 10.5s; animation-delay: 9s; font-size: 2.1em; }
+  p { margin: 0.5em 0; font-weight: 600; color: #555; }
 
-        /* Estilos para los tulipanes del margen */
-        .margin-tulip {
-            position: fixed; /* CAMBIADO a fixed para asegurar visibilidad en todo el viewport */
-            font-size: 4em;
-            color: #f48fb1;
-            opacity: 0.8;
-            z-index: 0; /* DETRÁS de todo */
-            pointer-events: none;
-        }
-        .margin-tulip-small { font-size: 2.5em; }
+  .btn {
+    background-color: #ffab91;
+    color: #fff;
+    padding: 0.8em 1.5em;
+    border: none;
+    border-radius: 30px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 1em;
+    transition: 0.3s;
+  }
+  .btn:hover { background-color: #ff8a80; transform: translateY(-2px); }
 
-        /* Posiciones específicas para los tulipanes del margen (usando vh/vw para móvil) */
-        .margin-tulip:nth-of-type(1) { top: 3vh; left: 5vw; transform: rotate(-25deg); }
-        .margin-tulip:nth-of-type(2) { top: 12vh; right: 10vw; transform: rotate(15deg); }
-        .margin-tulip:nth-of-type(3) { bottom: 8vh; left: 15vw; transform: rotate(35deg); }
-        .margin-tulip:nth-of-type(4) { bottom: 20vh; right: 14vw; transform: rotate(-30deg); }
-        .margin-tulip:nth-of-type(5) { top: 35vh; left: 2vw; transform: rotate(5deg); }
-        .margin-tulip:nth-of-type(6) { bottom: 30vh; right: 5vw; transform: rotate(-10deg); }
-        .margin-tulip:nth-of-type(7) { top: 5vh; left: 30vw; transform: rotate(40deg); opacity: 0.7; }
-        .margin-tulip:nth-of-type(8) { bottom: 10vh; right: 35vw; transform: rotate(-5deg); opacity: 0.6; }
-        .margin-tulip:nth-of-type(9) { top: 20vh; right: 2vw; transform: rotate(25deg); }
-        .margin-tulip:nth-of-type(10) { bottom: 3vh; left: 5vw; transform: rotate(-45deg); }
-        .margin-tulip:nth-of-type(11) { top: 40vh; right: 1vw; transform: rotate(18deg); }
-        .margin-tulip:nth-of-type(12) { bottom: 50vh; left: 10vw; transform: rotate(-22deg); }
-        .margin-tulip:nth-of-type(13) { top: 70vh; right: 8vw; transform: rotate(0deg); }
-        .margin-tulip:nth-of-type(14) { bottom: 2vh; right: 20vw; transform: rotate(55deg); }
-        .margin-tulip:nth-of-type(15) { top: 18vh; left: 1vw; transform: rotate(-15deg); }
-        .margin-tulip:nth-of-type(16) { bottom: 5vh; right: 1vw; transform: rotate(10deg); }
-    </style>
+  /* Animación de caída de emojis */
+  @keyframes fall {
+    0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+  }
 
-    <script>
-        function confirmarAsistencia() {
-            // Número de teléfono proporcionado por el usuario (sin el signo +)
-            const phoneNumber = '5215662750806';
-            // Mensaje final
-            const message = encodeURIComponent("¡Sí acepto!, quiero ir al autocinema contigo 💕✨");
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+  .falling {
+    position: fixed;
+    font-size: 2em;
+    pointer-events: none;
+    animation-name: fall;
+    animation-timing-function: linear;
+    z-index: 999;
+  }
 
-            window.open(whatsappUrl, '_blank');
-        }
-    </script>
+</style>
 </head>
 <body>
-    
-    <div class="margin-tulip">🌷</div>
-    <div class="margin-tulip margin-tulip-small">🌷</div>
-    <div class="margin-tulip">🌷</div>
-    <div class="margin-tulip margin-tulip-small">🌷</div>
-    <div class="margin-tulip">🌷</div>
-    <div class="margin-tulip margin-tulip-small">🌷</div>
-    <div class="margin-tulip">🌷</div>
-    <div class="margin-tulip margin-tulip-small">🌷</div>
-    <div class="margin-tulip">🌷</div>
-    <div class="margin-tulip margin-tulip-small">🌷</div>
-    <div class="margin-tulip">🌷</div>
-    <div class="margin-tulip margin-tulip-small">🌷</div>
-    <div class="margin-tulip">🌷</div>
-    <div class="margin-tulip margin-tulip-small">🌷</div>
-    <div class="margin-tulip">🌷</div>
-    <div class="margin-tulip margin-tulip-small">🌷</div>
 
-    <div class="falling-item">❤️</div>
-    <div class="falling-item">🌸</div>
-    <div class="falling-item">💖</div>
-    <div class="falling-item">🌷</div>
-    <div class="falling-item">❤️</div>
-    <div class="falling-item">🌸</div>
-    <div class="falling-item">💖</div>
-    <div class="falling-item">🌷</div>
-    <div class="falling-item">❤️</div>
-    <div class="falling-item">🌸</div>
+<div class="container">
+  <h1>¡Tenemos una cita!</h1>
+  <h2>Samanta</h2>
 
-    <div class="container">
-        <h1>¡Tenemos una cita!</h1>
-        <h2>Samanta</h2>
+  <div class="ticket-box">
+    <div class="ticket-title">AUTOCINEMA</div>
+    <div class="ticket-names">CÉSAR Y SAM</div>
+    <div class="ticket-details">5 DE NOVIEMBRE • 8:30 PM</div>
+    <div class="ticket-movie">Película: FRANKENSTEIN</div>
+    <span style="font-size:2em;">🚗</span>
+  </div>
 
-        <div class="ticket-box">
-            <div class="ticket-title">AUTOCINEMA</div>
-            <div class="ticket-names">CÉSAR Y SAM</div>
-            <div class="ticket-details">5 DE NOVIEMBRE • FUNCIÓN: 8:30 PM</div>
-            <div class="ticket-movie">Película: FRANKENSTEIN</div>
-            <span class="emoji-icon" role="img" aria-label="Coche">🚗</span>
-        </div>
+  <p>Pasaré por ti más temprano.</p>
+  <p>Ponte linda y disfruta de la hermosa noche que tendremos.</p>
+  <p>Esta noche será muy especial.</p>
 
-        <p>Pasare por ti más temprano.</p>
-        <p>Ponte linda y disfruta de la hermosa noche que tendremos.</p>
-        <p>Esta noche será muy especial.</p>
+  <button class="btn" onclick="confirmarAsistencia()">¡Acepto!</button>
+</div>
 
-        <div class="buttons">
-            <button class="btn" onclick="confirmarAsistencia()">¡Acepto!</button>
-        </div>
-    </div>
+<script>
+const emojis = ['❤️','💖','🌸','🌷','💞'];
+function crearEmoji() {
+  const e = document.createElement('div');
+  e.classList.add('falling');
+  e.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+  e.style.left = Math.random() * 100 + 'vw';
+  e.style.fontSize = (Math.random()*1+1.2)+'em';
+  e.style.animationDuration = (Math.random()*5+5)+'s';
+  e.style.animationDelay = '0s';
+  document.body.appendChild(e);
+  setTimeout(()=> e.remove(),10000);
+}
+setInterval(crearEmoji, 400);
+
+function confirmarAsistencia() {
+  const phoneNumber = '5215662750806';
+  const message = encodeURIComponent("¡Sí acepto!, quiero ir al autocinema contigo 💕✨");
+  window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+}
+</script>
 </body>
 </html>
