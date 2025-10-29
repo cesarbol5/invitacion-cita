@@ -16,7 +16,7 @@
             min-height: 100vh;
             margin: 0;
             position: relative;
-            overflow: hidden;
+            overflow: hidden; /* Esto es importante para que los elementos que caen no creen barras de desplazamiento */
             font-size: 16px; /* Base para rem */
         }
         .container {
@@ -28,7 +28,7 @@
             max-width: 400px;
             width: 90%;
             position: relative;
-            z-index: 1; /* Invitación: Capa intermedia */
+            z-index: 10; /* La invitación: Capa intermedia (suficientemente alta para el contenido) */
         }
         h1 {
             font-family: 'Pacifico', cursive;
@@ -70,65 +70,21 @@
         .ticket-box::before { left: -10px; }
         .ticket-box::after { right: -10px; }
 
-        .ticket-title {
-            font-size: 1.1em;
-            font-weight: bold;
-            color: #a0522d;
-            margin-bottom: 0.3em;
-        }
-        .ticket-names {
-            font-size: 1.4em;
-            font-weight: bold;
-            color: #8b4513;
-            margin-bottom: 0.6em;
-        }
-        .ticket-details {
-            font-size: 0.9em;
-            color: #696969;
-            margin-bottom: 0.5em;
-        }
-        .ticket-movie {
-            font-size: 0.95em;
-            font-weight: bold;
-            color: #d1a684;
-            margin-bottom: 1em;
-            text-transform: uppercase;
-        }
-        .emoji-icon {
-            font-size: 2.2em;
-            display: block;
-            margin-top: 0.8em;
-        }
-        p {
-            color: #555;
-            font-size: 1em;
-            line-height: 1.5;
-            margin-bottom: 1.5em;
-            font-weight: 600;
-        }
+        .ticket-title { font-size: 1.1em; font-weight: bold; color: #a0522d; margin-bottom: 0.3em; }
+        .ticket-names { font-size: 1.4em; font-weight: bold; color: #8b4513; margin-bottom: 0.6em; }
+        .ticket-details { font-size: 0.9em; color: #696969; margin-bottom: 0.5em; }
+        .ticket-movie { font-size: 0.95em; font-weight: bold; color: #d1a684; margin-bottom: 1em; text-transform: uppercase; }
+        .emoji-icon { font-size: 2.2em; display: block; margin-top: 0.8em; }
+        p { color: #555; font-size: 1em; line-height: 1.5; margin-bottom: 1.5em; font-weight: 600; }
 
         /* Botón de Aceptar */
-        .buttons {
-            display: flex;
-            justify-content: center;
-            margin-top: 1.5em;
-        }
+        .buttons { display: flex; justify-content: center; margin-top: 1.5em; }
         .btn {
-            background-color: #ffab91;
-            color: #fff;
-            padding: 0.8em 1.5em;
-            border: none;
-            border-radius: 30px;
-            font-size: 1.1em;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            font-weight: bold;
+            background-color: #ffab91; color: #fff; padding: 0.8em 1.5em; border: none; border-radius: 30px;
+            font-size: 1.1em; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); font-weight: bold;
         }
-        .btn:hover {
-            background-color: #ff8a80;
-            transform: translateY(-2px);
-        }
+        .btn:hover { background-color: #ff8a80; transform: translateY(-2px); }
 
         /* Animación de Corazones y Flores que Caen */
         @keyframes fall {
@@ -143,10 +99,9 @@
             opacity: 0;
             pointer-events: none;
             animation: fall linear infinite;
-            z-index: 2; /* POR ENCIMA DE LA INVITACIÓN */
+            z-index: 999; /* ALTÍSIMO para que esté SIEMPRE POR ENCIMA */
         }
-
-        /* Configuraciones de caída variadas (sin cambios para mantener la funcionalidad) */
+        /* Configuraciones de caída variadas */
         .falling-item:nth-child(1) { left: 5%; animation-duration: 8s; animation-delay: 0s; font-size: 1.2em; }
         .falling-item:nth-child(2) { left: 15%; animation-duration: 12s; animation-delay: 1s; font-size: 2em; }
         .falling-item:nth-child(3) { left: 25%; animation-duration: 7s; animation-delay: 2s; font-size: 1.4em; }
@@ -158,21 +113,18 @@
         .falling-item:nth-child(9) { left: 85%; animation-duration: 8.5s; animation-delay: 8s; font-size: 1.3em; }
         .falling-item:nth-child(10) { left: 95%; animation-duration: 10.5s; animation-delay: 9s; font-size: 2.1em; }
 
-        /* Estilos para los tulipanes del margen - AUMENTADOS Y CON MÁS VARIACIÓN */
+        /* Estilos para los tulipanes del margen */
         .margin-tulip {
-            position: absolute;
-            font-size: 4em; /* Más grandes */
-            color: #f48fb1; /* Color rosa medio */
+            position: fixed; /* CAMBIADO a fixed para asegurar visibilidad en todo el viewport */
+            font-size: 4em;
+            color: #f48fb1;
             opacity: 0.8;
-            z-index: 0; /* DETRÁS de la invitación */
+            z-index: 0; /* DETRÁS de todo */
             pointer-events: none;
-            transform: rotate(0deg);
         }
-        .margin-tulip-small {
-            font-size: 2.5em; /* Tamaño pequeño ajustado */
-        }
+        .margin-tulip-small { font-size: 2.5em; }
 
-        /* Posiciones específicas para los tulipanes del margen (más de 10) */
+        /* Posiciones específicas para los tulipanes del margen (usando vh/vw para móvil) */
         .margin-tulip:nth-of-type(1) { top: 3vh; left: 5vw; transform: rotate(-25deg); }
         .margin-tulip:nth-of-type(2) { top: 12vh; right: 10vw; transform: rotate(15deg); }
         .margin-tulip:nth-of-type(3) { bottom: 8vh; left: 15vw; transform: rotate(35deg); }
@@ -189,43 +141,13 @@
         .margin-tulip:nth-of-type(14) { bottom: 2vh; right: 20vw; transform: rotate(55deg); }
         .margin-tulip:nth-of-type(15) { top: 18vh; left: 1vw; transform: rotate(-15deg); }
         .margin-tulip:nth-of-type(16) { bottom: 5vh; right: 1vw; transform: rotate(10deg); }
-
-
-        /* Media Queries para pantallas más grandes (sin cambios) */
-        @media (min-width: 600px) {
-            h1 { font-size: 2.8em; }
-            h2 { font-size: 1.8em; }
-            .ticket-title { font-size: 1.3em; }
-            .ticket-names { font-size: 1.6em; }
-            .emoji-icon { font-size: 2.5em; }
-            p { font-size: 1.1em; }
-            .btn { padding: 12px 25px; }
-            .falling-item { font-size: 2.2em; }
-            /* Restaurar tamaños de falling-item para desktop */
-            .falling-item:nth-child(1) { font-size: 1.5em; }
-            .falling-item:nth-child(2) { font-size: 2.5em; }
-            .falling-item:nth-child(3) { font-size: 1.8em; }
-            .falling-item:nth-child(4) { font-size: 2.2em; }
-            .falling-item:nth-child(5) { font-size: 1.6em; }
-            .falling-item:nth-child(6) { font-size: 2.3em; }
-            .falling-item:nth-child(7) { font-size: 1.9em; }
-            .falling-item:nth-child(8) { font-size: 2.1em; }
-            .falling-item:nth-child(9) { font-size: 1.7em; }
-            .falling-item:nth-child(10) { font-size: 2.4em; }
-
-            /* Ajustes para los tulipanes del margen en pantallas más grandes */
-            .margin-tulip { font-size: 4.5em; }
-            .margin-tulip-small { font-size: 3.5em; }
-        }
-
     </style>
 
     <script>
         function confirmarAsistencia() {
-            // **IMPORTANTE: REEMPLAZA [TU_NUMERO_DE_TELEFONO] CON TU NÚMERO (ej: 525512345678)**
-            // NOTA: He notado que pusiste un "+" en el número de teléfono, lo he quitado ya que la API de wa.me no lo requiere.
+            // Número de teléfono proporcionado por el usuario (sin el signo +)
             const phoneNumber = '5215662750806';
-            // Mensaje actualizado
+            // Mensaje final
             const message = encodeURIComponent("¡Sí acepto!, quiero ir al autocinema contigo 💕✨");
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
 
