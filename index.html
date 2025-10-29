@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Invitación Especial 💐</title>
+  <title>Invitación Samanta</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -21,7 +21,7 @@
       justify-content: center;
       align-items: flex-start;
       padding: 20px;
-      overflow-x: hidden;
+      overflow: hidden;
       position: relative;
     }
 
@@ -38,7 +38,7 @@
       margin-top: 20px;
     }
 
-    /* Círculo con ramo y corazón */
+    /* Círculo con ramo */
     .circle {
       width: 120px;
       height: 120px;
@@ -169,31 +169,22 @@
     .btn:hover {
       background: #ff5252;
       transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(255, 82, 82, 0.4);
     }
 
-    .btn:active {
-      transform: translateY(0);
-    }
-
-    /* Elementos flotantes SOBRE la carta */
+    /* Elementos flotantes SOBRE todo */
     .floating {
       position: fixed;
       pointer-events: none;
       animation: float 6s infinite ease-in-out;
-      z-index: 20;
+      z-index: 100;
       user-select: none;
+      font-size: 1.2rem;
     }
 
     @keyframes float {
       0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
-      50% { transform: translateY(-25px) rotate(8deg); opacity: 1; }
+      50% { transform: translateY(-30px) rotate(10deg); opacity: 1; }
     }
-
-    .heart { color: #ff8a80; }
-    .flower.pink { color: #ff80ab; }
-    .flower.yellow { color: #ffd54f; }
-    .flower.orange { color: #ffab40; }
   </style>
 </head>
 <body>
@@ -214,7 +205,7 @@
       un café o dar un paseo conmigo?
     </p>
 
-    <!-- Boleto de autocinema -->
+    <!-- Boleto -->
     <div class="ticket">
       <h2>AUTOCINEMA</h2>
       <div class="names">CÉSAR Y SAMANTA</div>
@@ -232,49 +223,42 @@
     </button>
   </div>
 
-  <!-- Elementos flotantes -->
+  <!-- Emojis flotantes reales -->
   <script>
-    const hearts = ['Heart', 'Red Heart', 'Pink Heart', 'Sparkling Heart', 'Orange Heart'];
-    const flowers = ['Cherry Blossom', 'Sunflower', 'Hibiscus', 'Tulip', 'Blossom'];
+    const emojis = ['Heart', 'Red Heart', 'Pink Heart', 'Sparkling Heart', 'Orange Heart', 'Cherry Blossom', 'Sunflower', 'Hibiscus', 'Tulip', 'Blossom'];
 
     function createFloating() {
-      const types = [...hearts, ...flowers];
-      const type = types[Math.floor(Math.random() * types.length)];
-      const isHeart = hearts.includes(type);
-      const size = isHeart ? (16 + Math.random() * 14) : (20 + Math.random() * 12);
-      const left = Math.random() * 90 + 5;
-      const top = Math.random() * 80 + 10;
+      const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+      const size = 18 + Math.random() * 16;
+      const left = Math.random() * 85 + 5;
       const duration = 5 + Math.random() * 5;
-      const delay = Math.random() * 3;
 
       const el = document.createElement('div');
-      el.className = `floating ${isHeart ? 'heart' : 'flower ' + (type === 'Sunflower' ? 'yellow' : type === 'Blossom' ? 'orange' : 'pink')}`;
+      el.className = 'floating';
+      el.innerHTML = emoji;
       el.style.left = `${left}vw`;
-      el.style.top = `${top}vh`;
+      el.style.top = `${Math.random() * 70 + 15}vh`;
       el.style.fontSize = `${size}px`;
       el.style.animationDuration = `${duration}s`;
-      el.style.animationDelay = `${delay}s`;
-      el.innerHTML = type;
 
       document.body.appendChild(el);
 
-      setTimeout(() => el.remove(), (duration + delay) * 1000 + 2000);
+      setTimeout(() => el.remove(), duration * 1000 + 2000);
     }
 
-    // Generar elementos cada 700ms
-    setInterval(createFloating, 700);
+    // Generar cada 600ms
+    setInterval(createFloating, 600);
 
-    // Iniciar con varios
-    for (let i = 0; i < 15; i++) {
-      setTimeout(createFloating, i * 250);
+    // Iniciar con 12 emojis
+    for (let i = 0; i < 12; i++) {
+      setTimeout(createFloating, i * 300);
     }
 
-    // Abrir WhatsApp
+    // WhatsApp
     function openWhatsApp() {
-      const phone = "525662750806"; // ⚠️ REEMPLAZA con el número real (formato internacional sin +)
-      const message = encodeURIComponent("¡Sí acepto! quiero ir al auto cinema contigo 💕😘");
-      const url = `https://wa.me/${phone}?text=${message}`;
-      window.open(url, '_blank');
+      const phone = "521XXXXXXXXXX"; // ← CAMBIA AQUÍ TU NÚMERO
+      const message = encodeURIComponent("¡Sí acepto! Heart Estoy emocionada por nuestra cita y el autocinema. ¡Gracias por la invitación tan bonita! Smiling Face with Heart-Eyes");
+      window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
     }
   </script>
 
