@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invitación Especial</title>
+    <title>Invitación Especial - César y Sam</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* Estilos Base */
@@ -17,23 +17,31 @@
             margin: 0;
             position: relative;
             overflow: hidden;
+            font-size: 16px; /* Base para rem */
         }
         .container {
             background-color: #fff;
-            padding: 30px;
+            padding: 1.5em; /* Ajuste para móvil */
             border-radius: 20px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
             max-width: 400px;
             width: 90%;
             position: relative;
-            z-index: 1;
+            z-index: 1; /* Para que la invitación esté por debajo de los elementos que caen */
         }
         h1 {
             font-family: 'Pacifico', cursive;
             color: #ff8a80; /* Rosa rojizo */
-            font-size: 2.8em;
-            margin-bottom: 20px;
+            font-size: 2.5em; /* Ajuste para móvil */
+            margin-bottom: 0.2em; /* Reducido para hacer espacio a 'Samanta' */
+        }
+        h2 {
+            font-family: 'Pacifico', cursive;
+            color: #a0522d; /* Color marrón suave */
+            font-size: 1.5em; /* Ajuste para móvil */
+            margin-top: 0;
+            margin-bottom: 1.5em; /* Ajuste para móvil */
         }
 
         /* Estilos del Ticket */
@@ -41,9 +49,9 @@
             background-color: #f7e6d3; /* Crema claro */
             border: 2px dashed #d1a684; /* Marrón suave para el borde */
             border-radius: 10px;
-            padding: 20px 15px;
-            margin: 30px auto;
-            width: 80%;
+            padding: 1.2em 0.8em; /* Ajuste para móvil */
+            margin: 1.5em auto; /* Ajuste para móvil */
+            width: 85%; /* Ligeramente más ancho para móvil */
             max-width: 280px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             position: relative;
@@ -63,61 +71,55 @@
         .ticket-box::after { right: -10px; }
 
         .ticket-title {
-            font-size: 1.3em;
+            font-size: 1.1em; /* Ajuste para móvil */
             font-weight: bold;
             color: #a0522d; /* Sienna */
-            margin-bottom: 5px;
+            margin-bottom: 0.3em;
         }
         .ticket-names {
-            font-size: 1.6em;
+            font-size: 1.4em; /* Ajuste para móvil */
             font-weight: bold;
             color: #8b4513; /* SaddleBrown */
-            margin-bottom: 10px;
+            margin-bottom: 0.6em;
         }
         .ticket-details {
-            font-size: 0.95em;
+            font-size: 0.9em; /* Ajuste para móvil */
             color: #696969; /* DimGray */
-            margin-bottom: 15px;
+            margin-bottom: 1em;
         }
         .emoji-icon {
-            font-size: 2.5em; /* Tamaño grande para el emoji */
+            font-size: 2.2em; /* Ajuste para móvil */
             display: block;
-            margin-top: 10px;
+            margin-top: 0.8em;
         }
         p {
             color: #555;
-            font-size: 1.1em;
-            line-height: 1.6;
-            margin-bottom: 25px;
+            font-size: 1em; /* Ajuste para móvil */
+            line-height: 1.5;
+            margin-bottom: 1.2em; /* Ajuste para móvil */
         }
 
-        /* Botones */
+        /* Botón de Aceptar */
         .buttons {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
+            margin-top: 1.5em; /* Ajuste para móvil */
         }
         .btn {
             background-color: #ffab91; /* Naranja melocotón */
             color: #fff;
-            padding: 12px 25px;
+            padding: 0.8em 1.5em; /* Ajuste para móvil */
             border: none;
             border-radius: 30px;
             font-size: 1.1em;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
         }
         .btn:hover {
             background-color: #ff8a80; /* Rosa rojizo más intenso */
             transform: translateY(-2px);
-        }
-        .btn.reject {
-            background-color: #f48fb1; /* Rosa medio */
-        }
-        .btn.reject:hover {
-            background-color: #ec407a; /* Rosa más oscuro */
         }
 
         /* Animación de Corazones y Flores que Caen */
@@ -129,28 +131,59 @@
         .falling-item {
             position: fixed;
             top: 0;
-            font-size: 2em;
+            font-size: 2em; /* Tamaño base para los elementos que caen */
             opacity: 0;
             pointer-events: none;
             animation: fall linear infinite;
-            z-index: 0;
+            z-index: 2; /* AHORA ESTÁN POR ENCIMA DE TODO */
         }
 
-        /* Configuración de las animaciones individuales */
-        .falling-item:nth-child(1) { left: 5%; animation-duration: 8s; animation-delay: 0s; font-size: 1.5em; }
-        .falling-item:nth-child(2) { left: 15%; animation-duration: 12s; animation-delay: 1s; font-size: 2.5em; }
-        .falling-item:nth-child(3) { left: 25%; animation-duration: 7s; animation-delay: 2s; font-size: 1.8em; }
-        .falling-item:nth-child(4) { left: 35%; animation-duration: 10s; animation-delay: 3s; font-size: 2.2em; }
-        .falling-item:nth-child(5) { left: 45%; animation-duration: 9s; animation-delay: 4s; font-size: 1.6em; }
-        .falling-item:nth-child(6) { left: 55%; animation-duration: 11s; animation-delay: 5s; font-size: 2.3em; }
-        .falling-item:nth-child(7) { left: 65%; animation-duration: 6s; animation-delay: 6s; font-size: 1.9em; }
-        .falling-item:nth-child(8) { left: 75%; animation-duration: 13s; animation-delay: 7s; font-size: 2.1em; }
-        .falling-item:nth-child(9) { left: 85%; animation-duration: 8.5s; animation-delay: 8s; font-size: 1.7em; }
-        .falling-item:nth-child(10) { left: 95%; animation-duration: 10.5s; animation-delay: 9s; font-size: 2.4em; }
+        /* Configuraciones de caída variadas (ajustado ligeramente para móvil) */
+        .falling-item:nth-child(1) { left: 5%; animation-duration: 8s; animation-delay: 0s; font-size: 1.2em; }
+        .falling-item:nth-child(2) { left: 15%; animation-duration: 12s; animation-delay: 1s; font-size: 2em; }
+        .falling-item:nth-child(3) { left: 25%; animation-duration: 7s; animation-delay: 2s; font-size: 1.4em; }
+        .falling-item:nth-child(4) { left: 35%; animation-duration: 10s; animation-delay: 3s; font-size: 1.8em; }
+        .falling-item:nth-child(5) { left: 45%; animation-duration: 9s; animation-delay: 4s; font-size: 1.3em; }
+        .falling-item:nth-child(6) { left: 55%; animation-duration: 11s; animation-delay: 5s; font-size: 1.9em; }
+        .falling-item:nth-child(7) { left: 65%; animation-duration: 6s; animation-delay: 6s; font-size: 1.5em; }
+        .falling-item:nth-child(8) { left: 75%; animation-duration: 13s; animation-delay: 7s; font-size: 1.7em; }
+        .falling-item:nth-child(9) { left: 85%; animation-duration: 8.5s; animation-delay: 8s; font-size: 1.3em; }
+        .falling-item:nth-child(10) { left: 95%; animation-duration: 10.5s; animation-delay: 9s; font-size: 2.1em; }
 
-        /* Más estilos para variar */
-        .falling-item:nth-child(odd) { transform: scaleX(-1); /* Reflejar algunos para que se vean diferentes */ }
+        /* Media Queries para pantallas más grandes (opcional, para revertir algunos ajustes) */
+        @media (min-width: 600px) {
+            h1 { font-size: 2.8em; }
+            h2 { font-size: 1.8em; }
+            .ticket-title { font-size: 1.3em; }
+            .ticket-names { font-size: 1.6em; }
+            .emoji-icon { font-size: 2.5em; }
+            p { font-size: 1.1em; }
+            .btn { padding: 12px 25px; }
+            .falling-item { font-size: 2.2em; } /* Restaurar tamaño original para desktop */
+            .falling-item:nth-child(1) { font-size: 1.5em; }
+            .falling-item:nth-child(2) { font-size: 2.5em; }
+            .falling-item:nth-child(3) { font-size: 1.8em; }
+            .falling-item:nth-child(4) { font-size: 2.2em; }
+            .falling-item:nth-child(5) { font-size: 1.6em; }
+            .falling-item:nth-child(6) { font-size: 2.3em; }
+            .falling-item:nth-child(7) { font-size: 1.9em; }
+            .falling-item:nth-child(8) { font-size: 2.1em; }
+            .falling-item:nth-child(9) { font-size: 1.7em; }
+            .falling-item:nth-child(10) { font-size: 2.4em; }
+        }
+
     </style>
+
+    <script>
+        function confirmarAsistencia() {
+            // **IMPORTANTE: REEMPLAZA [TU_NUMERO_DE_TELEFONO] CON TU NÚMERO (ej: 525512345678)**
+            const phoneNumber = '+5215662750806';
+            const message = encodeURIComponent("¡Hola César! Confirmo que acepto la invitación al Autocinema el 5 de Noviembre. ¡Estoy lista!");
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
 </head>
 <body>
     <div class="falling-item">❤️</div>
@@ -166,22 +199,23 @@
 
     <div class="container">
         <h1>¡Tenemos una cita!</h1>
+        <h2>Sam</h2>
 
         <div class="ticket-box">
-            <div class="ticket-title">EVENTO DE LUJO</div>
-            <div class="ticket-names">TÚ Y YO</div>
-            <div class="ticket-details">PRÓXIMO FIN DE SEMANA • HORA SECRETA</div>
-            <span class="emoji-icon" role="img" aria-label="Carrito de compra">🛒</span>
+            <div class="ticket-title">AUTOCINEMA</div>
+            <div class="ticket-names">CESAR Y SAM</div>
+            <div class="ticket-details">5 DE NOVIEMBRE • 8:30 PM</div>
+            <span class="emoji-icon" role="img" aria-label="Coche">🚗</span>
         </div>
 
-        <p>Prepara tu mejor atuendo. Será una noche épica llena de sorpresas inolvidables.</p>
-        <p>¿Aceptas embarcarte en esta aventura conmigo?</p>
+        <p>Voy a pasar por ti más temprano.</p>
+        <p>Ponte linda y disfruta de la hermosa noche que tendremos viendo la película bajo las estrellas.</p>
+        <p>¡Solo tienes que tocar el botón para confirmar!</p>
+
 
         <div class="buttons">
-            <button class="btn">¡Acepto!</button>
-            <button class="btn reject">Lo pensaré...</button>
+            <button class="btn" onclick="confirmarAsistencia()">¡Acepto!</button>
         </div>
     </div>
 </body>
 </html>
-
