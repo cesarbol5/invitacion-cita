@@ -28,7 +28,7 @@
             max-width: 400px;
             width: 90%;
             position: relative;
-            z-index: 1; /* La invitación estará encima del fondo y los tulipanes del margen, pero debajo de los que caen */
+            z-index: 1; /* Invitación: Capa intermedia */
         }
         h1 {
             font-family: 'Pacifico', cursive;
@@ -143,10 +143,10 @@
             opacity: 0;
             pointer-events: none;
             animation: fall linear infinite;
-            z-index: 2; /* POR ENCIMA DE LA INVITACIÓN Y LOS TULIPANES DEL MARGEN */
+            z-index: 2; /* POR ENCIMA DE LA INVITACIÓN */
         }
 
-        /* Configuraciones de caída variadas */
+        /* Configuraciones de caída variadas (sin cambios para mantener la funcionalidad) */
         .falling-item:nth-child(1) { left: 5%; animation-duration: 8s; animation-delay: 0s; font-size: 1.2em; }
         .falling-item:nth-child(2) { left: 15%; animation-duration: 12s; animation-delay: 1s; font-size: 2em; }
         .falling-item:nth-child(3) { left: 25%; animation-duration: 7s; animation-delay: 2s; font-size: 1.4em; }
@@ -158,33 +158,40 @@
         .falling-item:nth-child(9) { left: 85%; animation-duration: 8.5s; animation-delay: 8s; font-size: 1.3em; }
         .falling-item:nth-child(10) { left: 95%; animation-duration: 10.5s; animation-delay: 9s; font-size: 2.1em; }
 
-        /* Estilos para los tulipanes del margen */
+        /* Estilos para los tulipanes del margen - AUMENTADOS Y CON MÁS VARIACIÓN */
         .margin-tulip {
             position: absolute;
-            font-size: 3em; /* Tamaño de los tulipanes del margen */
+            font-size: 4em; /* Más grandes */
             color: #f48fb1; /* Color rosa medio */
             opacity: 0.8;
-            z-index: 0; /* DETRÁS de la invitación, pero encima del fondo */
+            z-index: 0; /* DETRÁS de la invitación */
             pointer-events: none;
-            transform: rotate(0deg); /* Base */
+            transform: rotate(0deg);
         }
         .margin-tulip-small {
-            font-size: 2.2em;
+            font-size: 2.5em; /* Tamaño pequeño ajustado */
         }
 
-        /* Posiciones específicas para los tulipanes del margen */
-        .margin-tulip:nth-of-type(1) { top: 2vh; left: 5vw; transform: rotate(-20deg); }
-        .margin-tulip:nth-of-type(2) { top: 10vh; right: 8vw; transform: rotate(15deg); }
-        .margin-tulip:nth-of-type(3) { bottom: 5vh; left: 12vw; transform: rotate(30deg); }
-        .margin-tulip:nth-of-type(4) { bottom: 15vh; right: 10vw; transform: rotate(-25deg); }
-        .margin-tulip:nth-of-type(5) { top: 45vh; left: 2vw; transform: rotate(10deg); }
-        .margin-tulip:nth-of-type(6) { bottom: 40vh; right: 3vw; transform: rotate(-5deg); }
-        .margin-tulip:nth-of-type(7) { top: 5vh; left: 40vw; transform: rotate(5deg); opacity: 0.6; } /* Más al centro, más tenue */
-        .margin-tulip:nth-of-type(8) { bottom: 8vh; right: 45vw; transform: rotate(-10deg); opacity: 0.7; }
-        .margin-tulip:nth-of-type(9) { top: 25vh; right: 1vw; transform: rotate(20deg); } /* Cerca del borde */
-        .margin-tulip:nth-of-type(10) { bottom: 2vh; left: 1vw; transform: rotate(-35deg); } /* Cerca del borde */
+        /* Posiciones específicas para los tulipanes del margen (más de 10) */
+        .margin-tulip:nth-of-type(1) { top: 3vh; left: 5vw; transform: rotate(-25deg); }
+        .margin-tulip:nth-of-type(2) { top: 12vh; right: 10vw; transform: rotate(15deg); }
+        .margin-tulip:nth-of-type(3) { bottom: 8vh; left: 15vw; transform: rotate(35deg); }
+        .margin-tulip:nth-of-type(4) { bottom: 20vh; right: 14vw; transform: rotate(-30deg); }
+        .margin-tulip:nth-of-type(5) { top: 35vh; left: 2vw; transform: rotate(5deg); }
+        .margin-tulip:nth-of-type(6) { bottom: 30vh; right: 5vw; transform: rotate(-10deg); }
+        .margin-tulip:nth-of-type(7) { top: 5vh; left: 30vw; transform: rotate(40deg); opacity: 0.7; }
+        .margin-tulip:nth-of-type(8) { bottom: 10vh; right: 35vw; transform: rotate(-5deg); opacity: 0.6; }
+        .margin-tulip:nth-of-type(9) { top: 20vh; right: 2vw; transform: rotate(25deg); }
+        .margin-tulip:nth-of-type(10) { bottom: 3vh; left: 5vw; transform: rotate(-45deg); }
+        .margin-tulip:nth-of-type(11) { top: 40vh; right: 1vw; transform: rotate(18deg); }
+        .margin-tulip:nth-of-type(12) { bottom: 50vh; left: 10vw; transform: rotate(-22deg); }
+        .margin-tulip:nth-of-type(13) { top: 70vh; right: 8vw; transform: rotate(0deg); }
+        .margin-tulip:nth-of-type(14) { bottom: 2vh; right: 20vw; transform: rotate(55deg); }
+        .margin-tulip:nth-of-type(15) { top: 18vh; left: 1vw; transform: rotate(-15deg); }
+        .margin-tulip:nth-of-type(16) { bottom: 5vh; right: 1vw; transform: rotate(10deg); }
 
-        /* Media Queries para pantallas más grandes (opcional, para revertir algunos ajustes) */
+
+        /* Media Queries para pantallas más grandes (sin cambios) */
         @media (min-width: 600px) {
             h1 { font-size: 2.8em; }
             h2 { font-size: 1.8em; }
@@ -207,12 +214,8 @@
             .falling-item:nth-child(10) { font-size: 2.4em; }
 
             /* Ajustes para los tulipanes del margen en pantallas más grandes */
-            .margin-tulip { font-size: 4em; }
-            .margin-tulip-small { font-size: 3em; }
-            .margin-tulip:nth-of-type(1) { top: 5vh; left: 8vw; }
-            .margin-tulip:nth-of-type(2) { top: 15vh; right: 10vw; }
-            .margin-tulip:nth-of-type(3) { bottom: 8vh; left: 15vw; }
-            .margin-tulip:nth-of-type(4) { bottom: 20vh; right: 12vw; }
+            .margin-tulip { font-size: 4.5em; }
+            .margin-tulip-small { font-size: 3.5em; }
         }
 
     </style>
@@ -220,7 +223,8 @@
     <script>
         function confirmarAsistencia() {
             // **IMPORTANTE: REEMPLAZA [TU_NUMERO_DE_TELEFONO] CON TU NÚMERO (ej: 525512345678)**
-            const phoneNumber = '+5215662750806';
+            // NOTA: He notado que pusiste un "+" en el número de teléfono, lo he quitado ya que la API de wa.me no lo requiere.
+            const phoneNumber = '5215662750806';
             // Mensaje actualizado
             const message = encodeURIComponent("¡Sí acepto!, quiero ir al autocinema contigo 💕✨");
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
@@ -230,6 +234,7 @@
     </script>
 </head>
 <body>
+    
     <div class="margin-tulip">🌷</div>
     <div class="margin-tulip margin-tulip-small">🌷</div>
     <div class="margin-tulip">🌷</div>
@@ -240,7 +245,12 @@
     <div class="margin-tulip margin-tulip-small">🌷</div>
     <div class="margin-tulip">🌷</div>
     <div class="margin-tulip margin-tulip-small">🌷</div>
-
+    <div class="margin-tulip">🌷</div>
+    <div class="margin-tulip margin-tulip-small">🌷</div>
+    <div class="margin-tulip">🌷</div>
+    <div class="margin-tulip margin-tulip-small">🌷</div>
+    <div class="margin-tulip">🌷</div>
+    <div class="margin-tulip margin-tulip-small">🌷</div>
 
     <div class="falling-item">❤️</div>
     <div class="falling-item">🌸</div>
@@ -255,6 +265,7 @@
 
     <div class="container">
         <h1>¡Tenemos una cita!</h1>
+        <h2>Samanta</h2>
 
         <div class="ticket-box">
             <div class="ticket-title">AUTOCINEMA</div>
@@ -264,10 +275,9 @@
             <span class="emoji-icon" role="img" aria-label="Coche">🚗</span>
         </div>
 
-        <p>Pasare por ti más temprano.</p>
+        <p>Voy a pasar por ti más temprano.</p>
         <p>Ponte linda y disfruta de la hermosa noche que tendremos.</p>
-        <p>Esta noche será muy especial.</p>
-
+        <p>Esta noche será muy especial y habrá sorpresas.</p>
 
         <div class="buttons">
             <button class="btn" onclick="confirmarAsistencia()">¡Acepto!</button>
