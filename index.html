@@ -85,11 +85,6 @@
       color: white;
     }
 
-    .decline {
-      background-color: #ffe1ea;
-      color: #a13d63;
-    }
-
     button:hover {
       transform: scale(1.05);
     }
@@ -126,8 +121,7 @@
     </div>
 
     <div class="actions">
-      <button class="accept" onclick="showMsg('¡Qué emoción! 💖 Nos vemos en el autocinema 🎬')">Aceptar</button>
-      <button class="decline" onclick="showMsg('Está bien 😊 Ojalá puedas acompañarme pronto')">Rechazar</button>
+      <button class="accept" onclick="openWhatsApp()">Aceptar 💕</button>
     </div>
   </div>
 
@@ -145,9 +139,10 @@
     }
     setInterval(createFloatingEmoji,600);
 
-    // modal simple
-    function showMsg(text){
-      alert(text);
+    // botón WhatsApp
+    function openWhatsApp(){
+      const url = 'https://wa.me/525662750806?text=S%C3%AD%2C%20quiero%20ir%20al%20autocinema%20contigo%20%F0%9F%92%95%E2%9C%A8';
+      window.open(url, '_blank');
     }
   </script>
 </body>
